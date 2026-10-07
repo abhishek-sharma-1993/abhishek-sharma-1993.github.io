@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Abhishek Sharma | Staff Software Engineer, Payments</title>
+<meta name="description" content="Abhishek Sharma, Staff Software Engineer at Visa. 10+ years building high-availability backend systems in Java for payments, e-commerce and logistics.">
+<meta property="og:title" content="Abhishek Sharma | Staff Software Engineer, Payments">
+<meta property="og:description" content="I build payment systems that stay up. Java, Kafka, Redis, gRPC, Kubernetes.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2313213C'/><text x='32' y='42' font-family='Arial' font-weight='700' font-size='26' fill='%23C9A66B' text-anchor='middle'>AS</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F5F8; --surface:#FFFFFF; --ink:#13213C; --muted:#56617A; --line:#D8DDE6;
+  --brass:#9A7640; --brass-soft:#E9DFCC; --ok:#1E7A62; --warn:#B0502C; --node:#EEF1F6;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --r-lg:18px; --r-sm:8px;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D1524; --surface:#132036; --ink:#E7EBF2; --muted:#9BA6BA; --line:#25324A;
+    --brass:#CFAE73; --brass-soft:#2C2A25; --ok:#4CC3A0; --warn:#E58B66; --node:#1A2944; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D1524; --surface:#132036; --ink:#E7EBF2; --muted:#9BA6BA; --line:#25324A;
+  --brass:#CFAE73; --brass-soft:#2C2A25; --ok:#4CC3A0; --warn:#E58B66; --node:#1A2944; color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth; scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,svg{max-width:100%}
+:focus-visible{outline:2px solid var(--brass); outline-offset:3px; border-radius:4px}
+.wrap{max-width:1120px; margin:0 auto; padding:0 24px}
+h1,h2,h3{font-family:var(--display); font-weight:700; line-height:1.1; margin:0; letter-spacing:-0.01em}
+h2{font-size:clamp(28px,3.4vw,40px); margin-bottom:28px}
+h3{font-size:21px; font-weight:500}
+p{margin:0 0 1em; max-width:66ch}
+.muted{color:var(--muted)}
+
+/* nav */
+header.nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px}
+.brand{font-family:var(--display); font-weight:700; font-size:19px; text-decoration:none}
+.brand span{color:var(--brass)}
+.nav nav{display:flex; align-items:center; gap:22px; font-size:15px}
+.nav nav a{text-decoration:none; color:var(--muted)}
+.nav nav a:hover{color:var(--ink)}
+.theme{background:none; border:1px solid var(--line); color:var(--ink); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:16px; display:grid; place-items:center}
+@media (max-width:720px){ .nav nav a.opt{display:none} }
+
+/* hero */
+.hero{padding:72px 0 56px}
+.hero .wrap{display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center}
+.hero h1{font-size:clamp(40px,5.6vw,68px); margin:14px 0 22px}
+.hello{font-size:16px; color:var(--muted); display:flex; align-items:center; gap:10px}
+.dot{width:9px; height:9px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 4px color-mix(in srgb, var(--ok) 22%, transparent)}
+.lede{font-size:19px; color:var(--muted); max-width:46ch}
+.ctas{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px}
+.btn{display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:999px; font:600 15px var(--body); text-decoration:none; cursor:pointer; border:1px solid var(--ink)}
+.btn.primary{background:var(--ink); color:var(--paper)}
+.btn.ghost{background:transparent; color:var(--ink)}
+.btn:hover{transform:translateY(-1px)}
+@media (max-width:900px){ .hero .wrap{grid-template-columns:1fr; gap:40px} .hero{padding-top:48px} }
+
+/* 3DS simulator */
+.sim{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px; box-shadow:0 30px 60px -40px rgba(19,33,60,.45)}
+.sim-head{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:16px}
+.sim-head h3{font-size:19px}
+.sim-head p{font-size:13.5px; color:var(--muted); margin:4px 0 0}
+.card{border-radius:14px; padding:16px 18px; color:#F4EEDF; background:linear-gradient(135deg,#1B2C52 0%,#13213C 55%,#2B2416 100%); font-size:14px; display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:18px}
+.card .num{font-family:var(--display); font-size:19px; letter-spacing:.08em}
+.card .amt{font-size:13px; opacity:.8}
+.chip{width:34px; height:26px; border-radius:6px; background:linear-gradient(135deg,#D9BE85,#A9874D); margin-bottom:12px}
+.flow{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; position:relative; margin-bottom:16px}
+.node{background:var(--node); border:1px solid var(--line); border-radius:10px; padding:10px 6px; text-align:center; font-size:12.5px; line-height:1.3; transition:background .25s, border-color .25s, color .25s}
+.node b{display:block; font-size:13.5px; font-weight:600}
+.node.on{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.node.done{border-color:var(--brass)}
+.controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between}
+.seg{display:inline-flex; border:1px solid var(--line); border-radius:999px; padding:3px}
+.seg button{border:0; background:none; color:var(--muted); font:500 13.5px var(--body); padding:7px 13px; border-radius:999px; cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+.log{list-style:none; margin:16px 0 0; padding:12px 14px; background:var(--paper); border-radius:10px; min-height:150px; font-size:13.5px}
+.log li{display:flex; justify-content:space-between; gap:12px; padding:4px 0; border-bottom:1px dashed var(--line)}
+.log li:last-child{border-bottom:0}
+.log .t{color:var(--muted); white-space:nowrap; font-variant-numeric:tabular-nums}
+.log .empty{color:var(--muted); border:0}
+.result{margin-top:12px; font-weight:600; font-size:15px; min-height:24px}
+.result.ok{color:var(--ok)} .result.warn{color:var(--warn)}
+.otp{display:none; margin-top:12px; gap:8px; align-items:center; flex-wrap:wrap; font-size:14px}
+.otp.show{display:flex}
+.otp input{width:110px; padding:8px 10px; border-radius:8px; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:500 15px var(--body); letter-spacing:.2em}
+.btn.sm{padding:8px 14px; font-size:13.5px}
+@media (max-width:480px){
+  .flow{grid-template-columns:repeat(2,1fr)}
+  .card .num{font-size:16px; letter-spacing:.05em; white-space:nowrap}
+  .sim{padding:16px}
+}
+
+/* sections */
+section.block{padding:84px 0; border-top:1px solid var(--line)}
+.about{display:grid; grid-template-columns:1fr 1.4fr; gap:56px}
+.about .facts{list-style:none; margin:0; padding:0; border-left:3px solid var(--brass); padding-left:20px}
+.about .facts li{padding:8px 0; color:var(--muted)}
+.about .facts strong{color:var(--ink); font-weight:600}
+@media (max-width:860px){ .about{grid-template-columns:1fr; gap:28px} }
+
+/* work */
+.work{display:grid; gap:0}
+.item{display:grid; grid-template-columns:260px 1fr; gap:40px; padding:32px 0; border-top:1px solid var(--line)}
+.item:first-child{border-top:0; padding-top:0}
+.item .tag{font-size:14px; color:var(--brass); font-weight:600; margin-bottom:6px}
+.item .res{font-weight:600}
+@media (max-width:760px){ .item{grid-template-columns:1fr; gap:10px} }
+
+/* rate limiter demo */
+.rl{margin-top:18px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px; max-width:560px}
+.bucket{display:flex; gap:6px; margin:10px 0 12px}
+.tok{width:30px; height:30px; border-radius:50%; border:2px solid var(--brass); transition:background .2s}
+.tok.full{background:var(--brass)}
+.rl-row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.rl-out{font-size:14px; color:var(--muted); margin-top:10px; min-height:22px}
+.pill{display:inline-block; padding:2px 8px; border-radius:999px; font-size:12.5px; font-weight:600; margin-right:4px}
+.pill.ok{background:color-mix(in srgb, var(--ok) 16%, transparent); color:var(--ok)}
+.pill.no{background:color-mix(in srgb, var(--warn) 16%, transparent); color:var(--warn)}
+
+/* experience timeline */
+.timeline{position:relative; margin:0; padding:0; list-style:none}
+.timeline::before{content:""; position:absolute; left:7px; top:8px; bottom:8px; width:2px; background:var(--line)}
+.job{position:relative; padding:0 0 18px 40px}
+.job::before{content:""; position:absolute; left:0; top:22px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:3px solid var(--brass)}
+.job:first-child::before{background:var(--brass)}
+.job button{all:unset; box-sizing:border-box; cursor:pointer; width:100%; display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:16px 0; flex-wrap:wrap}
+.job button:focus-visible{outline:2px solid var(--brass); outline-offset:4px; border-radius:6px}
+.job .co{font-family:var(--display); font-size:23px; font-weight:700}
+.job .role{color:var(--muted); font-size:15.5px}
+.job .when{color:var(--muted); font-size:14.5px; font-variant-numeric:tabular-nums}
+.job .chev{display:inline-block; transition:transform .2s; margin-left:8px; color:var(--brass)}
+.job[data-open="true"] .chev{transform:rotate(90deg)}
+.job .panel{display:none; padding-bottom:8px}
+.job[data-open="true"] .panel{display:block}
+.job ul{margin:0; padding-left:18px; color:var(--muted); max-width:72ch}
+.job li{margin:6px 0}
+.job li b{color:var(--ink); font-weight:600}
+
+/* skills */
+.skills{display:grid; grid-template-columns:repeat(2,1fr); gap:0 48px}
+.skill{padding:16px 0; border-top:1px solid var(--line)}
+.skill h3{font-size:17px; font-family:var(--body); font-weight:600; margin-bottom:4px}
+.skill p{color:var(--muted); margin:0; font-size:15.5px}
+@media (max-width:760px){ .skills{grid-template-columns:1fr} }
+
+/* contact */
+.contact{background:var(--ink); color:var(--paper); border-radius:24px; padding:56px 48px; display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:end}
+.contact h2{color:var(--paper); margin-bottom:14px}
+.contact p{color:color-mix(in srgb, var(--paper) 75%, transparent)}
+.contact .links{display:flex; flex-direction:column; gap:12px}
+.contact a.l{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid color-mix(in srgb, var(--paper) 22%, transparent); text-decoration:none; font-weight:500}
+.contact a.l span{color:var(--brass)}
+.copy{background:var(--brass); color:#13213C; border:0}
+@media (max-width:760px){ .contact{grid-template-columns:1fr; padding:40px 24px} }
+footer{padding:36px 0 48px; color:var(--muted); font-size:14px}
+
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important; scroll-behavior:auto!important} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Abhishek <span>Sharma</span></a>
+    <nav aria-label="Main">
+      <a class="opt" href="#about">About</a>
+      <a class="opt" href="#work">Work</a>
+      <a class="opt" href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <button class="theme" id="themeBtn" aria-label="Switch colour theme">◐</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="hello"><span class="dot" aria-hidden="true"></span>Staff Software Engineer at Visa, Bengaluru</div>
+        <h1>I build payment systems that stay up.</h1>
+        <p class="lede">10+ years building backend systems in Java across payments, e-commerce and logistics. Today I work on card payment authentication at 1,000 TPS and 99.999% availability.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#contact">Get in touch</a>
+          <a class="btn ghost" href="#experience">See my experience</a>
+        </div>
+      </div>
+
+      <div class="sim" aria-labelledby="simTitle">
+        <div class="sim-head">
+          <div>
+            <h3 id="simTitle">Try it: authenticate a card payment</h3>
+            <p>A simplified simulation of the public EMV 3-D Secure flow I work on. Timings are illustrative.</p>
+          </div>
+        </div>
+        <div class="card" aria-hidden="true">
+          <div><div class="chip"></div><div class="num">4111 •••• •••• 1111</div></div>
+          <div class="amt">₹2,499.00</div>
+        </div>
+        <div class="flow" id="flow">
+          <div class="node" data-n="0"><b>Checkout</b>Merchant</div>
+          <div class="node" data-n="1"><b>3DS Server</b>Merchant side</div>
+          <div class="node" data-n="2"><b>Directory Server</b>Card network</div>
+          <div class="node" data-n="3"><b>ACS</b>Card issuer</div>
+        </div>
+        <div class="controls">
+          <div class="seg" role="group" aria-label="Transaction risk">
+            <button type="button" aria-pressed="true" data-risk="low">Low risk</button>
+            <button type="button" aria-pressed="false" data-risk="high">High risk</button>
+          </div>
+          <button class="btn primary sm" id="runBtn" type="button">Run payment</button>
+        </div>
+        <ul class="log" id="log" aria-live="polite"><li class="empty">Pick a risk level and run the payment to see each step.</li></ul>
+        <div class="otp" id="otp">
+          <label for="otpIn">Issuer challenge: enter the code <b>2580</b></label>
+          <input id="otpIn" inputmode="numeric" maxlength="4" autocomplete="off">
+          <button class="btn primary sm" id="otpBtn" type="button">Verify code</button>
+        </div>
+        <div class="result" id="result" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="block" id="about">
+    <div class="wrap about">
+      <div>
+        <h2>About</h2>
+        <ul class="facts">
+          <li><strong>Now:</strong> Staff Software Engineer, Visa Secure</li>
+          <li><strong>Leading:</strong> a team of 4 engineers</li>
+          <li><strong>Before:</strong> Porter, Jio Platforms, FirstHive, eMart</li>
+          <li><strong>Based in:</strong> Bengaluru, India</li>
+        </ul>
+      </div>
+      <div>
+        <p>I work on the Directory Server for Visa Secure, the part of EMV 3-D Secure that decides how a card payment gets authenticated before it is authorized. It's a system where a few minutes of downtime means real people can't pay, so most of my time goes into reliability, performance and making releases boring.</p>
+        <p>Before Visa, I scaled Porter's core services to handle 10x load, built fulfilment microservices and a Kafka retry library for Ajio at Jio Platforms, and ran a campaign engine and loyalty platform handling millions of requests at FirstHive.</p>
+        <p class="muted">I enjoy mentoring engineers through design and code reviews, and I'm always happy to talk about distributed systems, payments or growing into a Staff role.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="block" id="work">
+    <div class="wrap">
+      <h2>Things I've built</h2>
+      <div class="work">
+        <article class="item">
+          <div><div class="tag">Visa</div><h3>Release automation for a payments platform</h3></div>
+          <div>
+            <p>Releases on a 99.999% availability platform were slow and manual. I led a team of 4 to build an internal deployment tool that standardizes every release step and makes rollbacks predictable.</p>
+            <p class="res">Release effort down 40%.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div><div class="tag">Porter</div><h3>Scaling core services 10x</h3></div>
+          <div>
+            <p>As part of the Tech Scalability pod, I profiled the hot paths, removed bottlenecks and partitioned large PostgreSQL tables that were slowing down critical queries.</p>
+            <p class="res">10x load handled; query latency down 30%.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div><div class="tag">Jio Platforms</div><h3>Kafka retry library</h3></div>
+          <div>
+            <p>Async messages between fulfilment services were getting lost on transient failures. I introduced Kafka-based messaging and a reusable retry library with backoff and failure handling.</p>
+            <p class="res">Adopted across 6 services; message reliability up 25%, downtime down 30%.</p>
+          </div>
+        </article>
+        <article class="item">
+          <div><div class="tag">Side project</div><h3>Distributed rate limiter on Redis</h3></div>
+          <div>
+            <p>A token bucket rate limiter that keeps request counts consistent across many app instances by doing the check-and-decrement atomically in Redis. Try the idea below: the bucket holds 5 tokens and refills one per second.</p>
+            <div class="rl" aria-labelledby="rlTitle">
+              <b id="rlTitle">Token bucket</b>
+              <div class="bucket" id="bucket" aria-hidden="true"></div>
+              <div class="rl-row">
+                <button class="btn primary sm" id="rlOne" type="button">Send 1 request</button>
+                <button class="btn ghost sm" id="rlBurst" type="button">Send burst of 8</button>
+              </div>
+              <div class="rl-out" id="rlOut" aria-live="polite">Tokens available: 5 of 5</div>
+            </div>
+            <p style="margin-top:14px"><a href="https://github.com/abhishek-sharma-1993">See my code on GitHub</a></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="block" id="experience">
+    <div class="wrap">
+      <h2>Experience</h2>
+      <ol class="timeline" id="timeline">
+        <li class="job" data-open="true">
+          <button aria-expanded="true"><span><span class="co">Visa</span> <span class="role">Staff Software Engineer, Visa Secure</span></span><span class="when">Sep 2025 – Present<span class="chev">›</span></span></button>
+          <div class="panel"><ul>
+            <li>Build the <b>Directory Server for EMV 3-D Secure</b>, which authenticates and authorizes card-not-present transactions between merchants and issuers.</li>
+            <li>Engineer a mission-critical platform processing <b>1,000 TPS at 99.999% availability</b> on Java, Spring Boot, Kafka, Redis, gRPC and Kubernetes.</li>
+            <li>Lead a team of 4 engineers; built a deployment tool that <b>cut release effort by 40%</b>.</li>
+          </ul></div>
+        </li>
+        <li class="job" data-open="false">
+          <button aria-expanded="false"><span><span class="co">Porter</span> <span class="role">SDE-3, Tech Scalability Pod</span></span><span class="when">Jun 2025 – Sep 2025<span class="chev">›</span></span></button>
+          <div class="panel"><ul>
+            <li>Scaled core backend services to handle <b>10x the previous load</b> by finding and fixing system bottlenecks.</li>
+            <li>Implemented PostgreSQL table partitioning, <b>cutting query latency by 30%</b>.</li>
+          </ul></div>
+        </li>
+        <li class="job" data-open="false">
+          <button aria-expanded="false"><span><span class="co">Jio Platforms</span> <span class="role">SDE-3 (promoted from SDE-2)</span></span><span class="when">Dec 2022 – Apr 2025<span class="chev">›</span></span></button>
+          <div class="panel"><ul>
+            <li>Led <b>6 Spring Boot microservices</b> for Ajio fulfilment across B2C, B2B and Grocery, improving shipment management efficiency by 35%.</li>
+            <li>Introduced Kafka and a retry library adopted across 6 services: <b>25% better message reliability, 30% less downtime</b>.</li>
+            <li>Built the Label Service from scratch, cutting invoice and label processing time by 40%.</li>
+            <li>Raised pack service throughput by 50%; improved incident response time by 40% with centralized monitoring.</li>
+            <li>Star Performer FY 2023-24 (A* rating).</li>
+          </ul></div>
+        </li>
+        <li class="job" data-open="false">
+          <button aria-expanded="false"><span><span class="co">FirstHive</span> <span class="role">Senior Software Developer</span></span><span class="when">May 2019 – Sep 2022<span class="chev">›</span></span></button>
+          <div class="panel"><ul>
+            <li>Led the campaign module of a customer data platform serving <b>millions of requests</b>; Java concurrency made campaign runs 30% faster.</li>
+            <li>Built WorldSwipe, a loyalty platform for high-volume points accrual and redemption.</li>
+            <li>Integrated payment gateways (Razorpay, Paytm, Stripe) and OAuth 2.0; cut API response times by 50% with Redis caching.</li>
+          </ul></div>
+        </li>
+        <li class="job" data-open="false">
+          <button aria-expanded="false"><span><span class="co">eMart Solutions</span> <span class="role">Software Developer</span></span><span class="when">Jan 2016 – Apr 2019<span class="chev">›</span></span></button>
+          <div class="panel"><ul>
+            <li>Built Java REST services for a CRM and client support-ticket platform on MySQL.</li>
+            <li>Optimized SQL queries for a 30% performance gain; set up JUnit testing and SonarQube.</li>
+          </ul></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="block" id="skills">
+    <div class="wrap">
+      <h2>Toolkit</h2>
+      <div class="skills">
+        <div class="skill"><h3>Languages and frameworks</h3><p>Java, Kotlin, Spring Boot, Hibernate/JPA, JUnit, Mockito</p></div>
+        <div class="skill"><h3>Distributed systems</h3><p>Microservices, Kafka, event-driven design, REST, gRPC, caching, rate limiting, circuit breakers</p></div>
+        <div class="skill"><h3>Payments and security</h3><p>EMV 3-D Secure, payment authentication and authorization, payment gateways, OAuth 2.0</p></div>
+        <div class="skill"><h3>Data</h3><p>PostgreSQL, MySQL, Oracle, MongoDB, Redis, Elasticsearch</p></div>
+        <div class="skill"><h3>Cloud and delivery</h3><p>AWS, Docker, Kubernetes, CI/CD, deployment automation</p></div>
+        <div class="skill"><h3>Observability</h3><p>Prometheus, Grafana, ELK, Datadog</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block" id="contact" style="border-top:0">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <h2>Let's talk</h2>
+          <p>I'm happy to chat about Staff, Lead and Principal backend roles in payments and fintech, or about distributed systems in general.</p>
+          <button class="btn copy" id="copyBtn" type="button">Copy email address</button>
+        </div>
+        <div class="links">
+          <a class="l" href="mailto:abhishek.hcst15@gmail.com">Email <span>abhishek.hcst15@gmail.com</span></a>
+          <a class="l" href="https://www.linkedin.com/in/abhishek-sharma-827234102/" target="_blank" rel="noopener">LinkedIn <span>Profile</span></a>
+          <a class="l" href="https://github.com/abhishek-sharma-1993" target="_blank" rel="noopener">GitHub <span>abhishek-sharma-1993</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© <span id="yr"></span> Abhishek Sharma. Built by hand, hosted on GitHub Pages.</div></footer>
+
+<script>
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sleep = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* theme toggle */
+  const root = document.documentElement, tb = document.getElementById('themeBtn');
+  try { const s = localStorage.getItem('theme'); if (s) root.dataset.theme = s; } catch(e){}
+  tb.addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch(e){}
+  });
+
+  /* 3DS simulator */
+  const nodes = [...document.querySelectorAll('.node')], log = document.getElementById('log'),
+        result = document.getElementById('result'), runBtn = document.getElementById('runBtn'),
+        otp = document.getElementById('otp'), otpIn = document.getElementById('otpIn'), otpBtn = document.getElementById('otpBtn');
+  let risk = 'low', t0 = 0, busy = false, resolveOtp = null;
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    if (busy) return;
+    risk = b.dataset.risk;
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  }));
+  const light = i => nodes.forEach((n, k) => { n.classList.toggle('on', k === i); if (k === i) n.classList.add('done'); });
+  const ms = d => { t0 += d; return t0 + ' ms'; };
+  const add = (text, d) => { const li = document.createElement('li'); li.innerHTML = `<span>${text}</span><span class="t">${ms(d)}</span>`; log.appendChild(li); };
+  async function run(){
+    if (busy) return; busy = true; runBtn.disabled = true; t0 = 0;
+    log.innerHTML = ''; result.textContent = ''; result.className = 'result';
+    nodes.forEach(n => n.classList.remove('on', 'done'));
+    light(0); add('Cardholder clicks Pay', 0); await sleep(500);
+    light(1); add('3DS Server sends AReq with device and transaction data', 12); await sleep(650);
+    light(2); add('Directory Server validates and routes by card range', 9); await sleep(650);
+    light(3); add('Issuer ACS runs risk assessment', 38); await sleep(700);
+    if (risk === 'low') {
+      add('ARes: authenticated without a challenge', 6); await sleep(500);
+      light(1); add('Result returned to merchant', 14);
+      result.textContent = 'Frictionless: approved for authorization, no extra step for the shopper.'; result.classList.add('ok');
+    } else {
+      add('ARes: challenge required', 6);
+      result.textContent = 'High risk: the issuer wants the shopper to verify.'; result.classList.add('warn');
+      otp.classList.add('show'); otpIn.value = ''; otpIn.focus();
+      await new Promise(r => resolveOtp = r);
+      otp.classList.remove('show');
+      add('CRes: shopper verified by issuer', 2400);
+      light(2); add('RReq/RRes: result shared via Directory Server', 11); await sleep(500);
+      light(1); add('Result returned to merchant', 10);
+      result.textContent = 'Challenge passed: approved for authorization.'; result.className = 'result ok';
+    }
+    busy = false; runBtn.disabled = false;
+  }
+  runBtn.addEventListener('click', run);
+  const verify = () => {
+    if (otpIn.value.trim() === '2580') { resolveOtp && resolveOtp(); resolveOtp = null; }
+    else { result.textContent = 'That code doesn\'t match. Enter 2580 to continue.'; result.className = 'result warn'; otpIn.focus(); }
+  };
+  otpBtn.addEventListener('click', verify);
+  otpIn.addEventListener('keydown', e => { if (e.key === 'Enter') verify(); });
+
+  /* token bucket demo */
+  const CAP = 5, bucket = document.getElementById('bucket'), out = document.getElementById('rlOut');
+  let tokens = CAP;
+  for (let i = 0; i < CAP; i++) { const d = document.createElement('div'); d.className = 'tok full'; bucket.appendChild(d); }
+  const draw = () => [...bucket.children].forEach((d, i) => d.classList.toggle('full', i < tokens));
+  const request = () => { if (tokens > 0) { tokens--; draw(); return true; } return false; };
+  document.getElementById('rlOne').addEventListener('click', () => {
+    const ok = request();
+    out.innerHTML = (ok ? '<span class="pill ok">200 OK</span>' : '<span class="pill no">429 Too Many Requests</span>') + ` Tokens available: ${tokens} of ${CAP}`;
+  });
+  document.getElementById('rlBurst').addEventListener('click', () => {
+    let a = 0, r = 0; for (let i = 0; i < 8; i++) request() ? a++ : r++;
+    out.innerHTML = `<span class="pill ok">${a} × 200</span><span class="pill no">${r} × 429</span> Tokens available: ${tokens} of ${CAP}`;
+  });
+  setInterval(() => { if (tokens < CAP) { tokens++; draw(); out.innerHTML = out.innerHTML.replace(/Tokens available: \d+/, 'Tokens available: ' + tokens); } }, 1000);
+
+  /* experience accordion */
+  document.querySelectorAll('.job button').forEach(b => b.addEventListener('click', () => {
+    const job = b.closest('.job'), open = job.dataset.open !== 'true';
+    job.dataset.open = open; b.setAttribute('aria-expanded', open);
+  }));
+
+  /* copy email */
+  const cb = document.getElementById('copyBtn');
+  cb.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('abhishek.hcst15@gmail.com'); cb.textContent = 'Email address copied'; }
+    catch(e) { cb.textContent = 'abhishek.hcst15@gmail.com'; }
+    setTimeout(() => cb.textContent = 'Copy email address', 2500);
+  });
+})();
+</script>
+</body>
+</html>
