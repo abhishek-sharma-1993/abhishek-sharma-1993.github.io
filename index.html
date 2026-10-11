@@ -18,7 +18,7 @@
 <meta property="og:image:alt" content="Abhishek Sharma, Staff Software Engineer at Visa: 1,000 TPS, 99.999% availability, 10+ years Java backend">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Abhishek Sharma","jobTitle":"Staff Software Engineer","worksFor":{"@type":"Organization","name":"Visa"},"address":{"@type":"PostalAddress","addressLocality":"Bengaluru","addressCountry":"IN"},"url":"https://abhishek-sharma-93.com/","sameAs":["https://www.linkedin.com/in/abhishek-sharma-827234102/","https://github.com/abhishek-sharma-1993"],"knowsAbout":["Payments","EMV 3-D Secure","Distributed systems","Java","Kafka","Redis"]}
+{"@context":"https://schema.org","@type":"Person","name":"Abhishek Sharma","jobTitle":"Staff Software Engineer","worksFor":{"@type":"Organization","name":"Visa"},"address":{"@type":"PostalAddress","addressLocality":"Bengaluru","addressCountry":"IN"},"url":"https://abhishek-sharma-93.com/","sameAs":["https://www.linkedin.com/in/abhish21/","https://github.com/abhishek-sharma-1993"],"knowsAbout":["Apache Kafka","Payments","EMV 3-D Secure","Distributed systems","Java","Kafka","Redis"]}
 </script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2313213C'/><text x='32' y='42' font-family='Arial' font-weight='700' font-size='26' fill='%23C9A66B' text-anchor='middle'>AS</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,6 +67,7 @@ header.nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; backgr
 .nav nav a{text-decoration:none; color:var(--muted)}
 .nav nav a:hover{color:var(--ink)}
 .theme{background:none; border:1px solid var(--line); color:var(--ink); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:16px; display:grid; place-items:center}
+@media (max-width:960px){ .nav nav a.opt2{display:none} }
 @media (max-width:720px){ .nav nav a.opt{display:none} }
 
 /* hero */
@@ -181,6 +182,25 @@ section.block{padding:84px 0; border-top:1px solid var(--line)}
 @media (max-width:860px){ .posts{grid-template-columns:1fr} }
 @media (max-width:520px){ .chain{flex-direction:column; align-items:flex-start; gap:6px} .chain .ar{transform:rotate(90deg); margin-left:18px} }
 
+/* kafka deep dive */
+.deep{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:32px; margin-bottom:28px}
+.deep .k,.post .k{font-size:13px; font-weight:600; color:var(--brass); text-transform:uppercase; letter-spacing:.06em}
+.deep-head h3{font-size:26px; margin:8px 0 12px}
+.deep-head p{color:var(--muted); max-width:78ch}
+.deep-cols{display:grid; grid-template-columns:1fr 1fr; gap:40px; margin:22px 0 26px}
+.deep h4{font-family:var(--display); font-size:18px; margin:0 0 12px}
+.pillars{margin:0; padding-left:20px; color:var(--muted); font-size:15.5px}
+.pillars li{margin:8px 0}
+.pillars b{color:var(--ink); font-weight:600}
+.deep code{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.88em; background:var(--node); padding:1px 5px; border-radius:5px; color:var(--ink)}
+.tradeoffs{display:grid; gap:10px}
+.to{border-left:3px solid var(--brass); padding:4px 0 4px 14px; font-size:15px}
+.to b{display:block; font-weight:600}
+.to span{color:var(--muted)}
+.note{margin-top:16px; font-size:14.5px; color:var(--muted)}
+.more{margin-top:18px; font-weight:600}
+@media (max-width:860px){ .deep-cols{grid-template-columns:1fr; gap:28px} .deep{padding:22px} }
+
 /* experience timeline */
 .timeline{position:relative; margin:0; padding:0; list-style:none}
 .timeline::before{content:""; position:absolute; left:7px; top:8px; bottom:8px; width:2px; background:var(--line)}
@@ -229,8 +249,9 @@ footer{padding:36px 0 48px; color:var(--muted); font-size:14px}
     <nav aria-label="Main">
       <a class="opt" href="#about">About</a>
       <a class="opt" href="#work">Work</a>
-      <a class="opt" href="#case-study">Case study</a>
+      <a class="opt opt2" href="#case-study">Case study</a>
       <a class="opt" href="#experience">Experience</a>
+      <a class="opt opt2" href="#writing">Writing</a>
       <a class="opt" href="Abhishek_Sharma_Resume.pdf" target="_blank" rel="noopener">Resume</a>
       <a href="#contact">Contact</a>
       <button class="theme" id="themeBtn" aria-label="Switch colour theme">◐</button>
@@ -420,26 +441,60 @@ footer{padding:36px 0 48px; color:var(--muted); font-size:14px}
   <section class="block" id="writing">
     <div class="wrap">
       <h2>Writing</h2>
+
+      <div class="deep">
+        <div class="deep-head">
+          <span class="k">Deep dive</span>
+          <h3>Apache Kafka, from the inside</h3>
+          <p>My notes from studying Kafka internals through the official docs, Confluent courses and production use. The short version: Kafka isn't a message queue, it's a distributed, append-only commit log. Producers write to the end, consumers read from any position at their own pace, and data stays for as long as retention allows.</p>
+        </div>
+
+        <div class="deep-cols">
+          <div>
+            <h4>Why it's fast</h4>
+            <ol class="pillars">
+              <li><b>Sequential I/O.</b> Writes only ever append to the end of the log, which disks handle far faster than random writes.</li>
+              <li><b>OS page cache, not the JVM heap.</b> Hot data is served from memory with no garbage-collection pauses.</li>
+              <li><b>Zero-copy.</b> <code>sendfile()</code> moves bytes from page cache to the network card without passing through the application. TLS turns this off, because data has to be encrypted first.</li>
+              <li><b>Batching.</b> <code>batch.size</code> and <code>linger.ms</code> turn many small writes into a few large ones.</li>
+              <li><b>One binary format end to end.</b> The broker stores what the producer sent and the consumer reads it as is, with no re-serializing.</li>
+            </ol>
+          </div>
+          <div>
+            <h4>Trade-offs you choose</h4>
+            <div class="tradeoffs">
+              <div class="to"><b>Durability ↔ latency</b><span><code>acks=all</code> with <code>min.insync.replicas=2</code> is safe but slower; <code>acks=1</code> is fast but can lose data.</span></div>
+              <div class="to"><b>Throughput ↔ ordering</b><span>More partitions mean more throughput but no global order; one partition keeps strict order but caps throughput.</span></div>
+              <div class="to"><b>Availability ↔ consistency</b><span>Unclean leader election keeps the topic writable but can lose data; turning it off avoids loss but can make the topic unavailable.</span></div>
+              <div class="to"><b>Throughput ↔ latency</b><span>A higher <code>linger.ms</code> batches more for throughput; <code>0</code> sends immediately.</span></div>
+            </div>
+            <p class="note">Scaling rule: consumer parallelism is capped by the partition count, and partitions can be added later but never removed, so size them for target throughput up front.</p>
+          </div>
+        </div>
+        <a class="btn ghost sm" href="https://www.linkedin.com/pulse/apache-kafka-complete-system-design-architecture-internals-sharma-aq7fc" target="_blank" rel="noopener">Read the full article with diagrams →</a>
+      </div>
+
       <div class="posts">
-        <a class="post" href="https://www.linkedin.com/in/abhishek-sharma-827234102/recent-activity/all/" target="_blank" rel="noopener">
-          <span class="k">Rate limiting</span>
-          <h3>A distributed rate limiter with Redis and Lua</h3>
-          <p>Why the check and the decrement must happen in one atomic step.</p>
+        <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7454224485425205248/" target="_blank" rel="noopener">
+          <span class="k">Kafka</span>
+          <h3>Kafka: complete system design</h3>
+          <p>Why Kafka is fast, how it scales, and the four trade-offs every team ends up choosing.</p>
           <span class="go">Read on LinkedIn →</span>
         </a>
-        <a class="post" href="https://www.linkedin.com/in/abhishek-sharma-827234102/recent-activity/all/" target="_blank" rel="noopener">
+        <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7514217131127836672/" target="_blank" rel="noopener">
           <span class="k">Reliability</span>
           <h3>Dangerous retries</h3>
           <p>How a well-meant retry loop turns one bad message into an outage, and what to do instead.</p>
           <span class="go">Read on LinkedIn →</span>
         </a>
-        <a class="post" href="https://www.linkedin.com/in/abhishek-sharma-827234102/recent-activity/all/" target="_blank" rel="noopener">
-          <span class="k">More</span>
-          <h3>Notes on payments and distributed systems</h3>
-          <p>Short posts on what I learn building systems that can't go down.</p>
-          <span class="go">Follow on LinkedIn →</span>
+        <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7512103610365714432/" target="_blank" rel="noopener">
+          <span class="k">Rate limiting</span>
+          <h3>A distributed rate limiter with Redis and Lua</h3>
+          <p>Why the check and the decrement must happen in one atomic step.</p>
+          <span class="go">Read on LinkedIn →</span>
         </a>
       </div>
+      <p class="more"><a href="https://www.linkedin.com/in/abhish21/recent-activity/all/" target="_blank" rel="noopener">More posts on LinkedIn →</a></p>
     </div>
   </section>
 
@@ -518,7 +573,7 @@ footer{padding:36px 0 48px; color:var(--muted); font-size:14px}
         </div>
         <div class="links">
           <a class="l" href="mailto:abhishek.hcst15@gmail.com">Email <span>abhishek.hcst15@gmail.com</span></a>
-          <a class="l" href="https://www.linkedin.com/in/abhishek-sharma-827234102/" target="_blank" rel="noopener">LinkedIn <span>Profile</span></a>
+          <a class="l" href="https://www.linkedin.com/in/abhish21/" target="_blank" rel="noopener">LinkedIn <span>Profile</span></a>
           <a class="l" href="https://github.com/abhishek-sharma-1993" target="_blank" rel="noopener">GitHub <span>abhishek-sharma-1993</span></a>
           <a class="l" href="Abhishek_Sharma_Resume.pdf" target="_blank" rel="noopener">Resume <span>PDF</span></a>
         </div>
