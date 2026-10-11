@@ -5,8 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Abhishek Sharma | Staff Software Engineer, Payments</title>
 <meta name="description" content="Abhishek Sharma, Staff Software Engineer at Visa. 10+ years building high-availability backend systems in Java for payments, e-commerce and logistics.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://abhishek-sharma-93.com/">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://abhishek-sharma-93.com/">
 <meta property="og:title" content="Abhishek Sharma | Staff Software Engineer, Payments">
 <meta property="og:description" content="I build payment systems that stay up. Java, Kafka, Redis, gRPC, Kubernetes.">
+<meta property="og:image" content="https://abhishek-sharma-93.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Abhishek Sharma, Staff Software Engineer at Visa: 1,000 TPS, 99.999% availability, 10+ years Java backend">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Abhishek Sharma","jobTitle":"Staff Software Engineer","worksFor":{"@type":"Organization","name":"Visa"},"address":{"@type":"PostalAddress","addressLocality":"Bengaluru","addressCountry":"IN"},"url":"https://abhishek-sharma-93.com/","sameAs":["https://www.linkedin.com/in/abhishek-sharma-827234102/","https://github.com/abhishek-sharma-1993"],"knowsAbout":["Payments","EMV 3-D Secure","Distributed systems","Java","Kafka","Redis"]}
+</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2313213C'/><text x='32' y='42' font-family='Arial' font-weight='700' font-size='26' fill='%23C9A66B' text-anchor='middle'>AS</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,6 +145,42 @@ section.block{padding:84px 0; border-top:1px solid var(--line)}
 .pill.ok{background:color-mix(in srgb, var(--ok) 16%, transparent); color:var(--ok)}
 .pill.no{background:color-mix(in srgb, var(--warn) 16%, transparent); color:var(--warn)}
 
+/* case study */
+.cs-intro{display:grid; grid-template-columns:1fr 1.4fr; gap:56px; margin-bottom:36px}
+.cs-meta{list-style:none; margin:0; padding:0 0 0 20px; border-left:3px solid var(--brass)}
+.cs-meta li{padding:6px 0; color:var(--muted)}
+.cs-meta strong{color:var(--ink); font-weight:600}
+.diagram{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:26px; margin:0 0 40px}
+.diagram figcaption{font-size:14px; color:var(--muted); margin-top:16px}
+.lane-label{font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:18px 0 10px}
+.lane-label:first-child{margin-top:0}
+.chain{display:flex; flex-wrap:wrap; align-items:center; gap:10px}
+.chain .b{border:1.5px solid var(--line); background:var(--node); border-radius:10px; padding:9px 14px; font-size:14.5px; font-weight:600; line-height:1.25}
+.chain .b small{display:block; font-weight:400; color:var(--muted); font-size:12.5px}
+.chain .b.ink{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.chain .b.ink small{color:color-mix(in srgb, var(--paper) 70%, transparent)}
+.chain .b.ok{border-color:var(--ok); color:var(--ok); background:transparent}
+.chain .b.bad{border-color:var(--warn); color:var(--warn); background:transparent}
+.chain .ar{color:var(--brass); font-weight:700}
+.cs-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:28px 48px}
+.cs-grid h3{font-size:19px; margin-bottom:10px}
+.cs-grid ul{margin:0; padding-left:18px; color:var(--muted)}
+.cs-grid li{margin:6px 0}
+.cs-grid li b{color:var(--ink); font-weight:600}
+.cs-result{margin-top:36px; padding:22px 26px; border-radius:var(--r-lg); background:var(--brass-soft); font-weight:600}
+@media (max-width:860px){ .cs-intro,.cs-grid{grid-template-columns:1fr; gap:24px} .diagram{padding:18px} }
+
+/* writing */
+.posts{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.post{display:flex; flex-direction:column; gap:8px; padding:22px; border:1px solid var(--line); border-radius:var(--r-lg); background:var(--surface); text-decoration:none}
+.post:hover{border-color:var(--brass)}
+.post .k{font-size:13px; font-weight:600; color:var(--brass); text-transform:uppercase; letter-spacing:.06em}
+.post h3{font-size:19px}
+.post p{color:var(--muted); font-size:15px; margin:0}
+.post .go{margin-top:auto; font-weight:600; font-size:14.5px}
+@media (max-width:860px){ .posts{grid-template-columns:1fr} }
+@media (max-width:520px){ .chain{flex-direction:column; align-items:flex-start; gap:6px} .chain .ar{transform:rotate(90deg); margin-left:18px} }
+
 /* experience timeline */
 .timeline{position:relative; margin:0; padding:0; list-style:none}
 .timeline::before{content:""; position:absolute; left:7px; top:8px; bottom:8px; width:2px; background:var(--line)}
@@ -180,7 +229,9 @@ footer{padding:36px 0 48px; color:var(--muted); font-size:14px}
     <nav aria-label="Main">
       <a class="opt" href="#about">About</a>
       <a class="opt" href="#work">Work</a>
+      <a class="opt" href="#case-study">Case study</a>
       <a class="opt" href="#experience">Experience</a>
+      <a class="opt" href="Abhishek_Sharma_Resume.pdf" target="_blank" rel="noopener">Resume</a>
       <a href="#contact">Contact</a>
       <button class="theme" id="themeBtn" aria-label="Switch colour theme">◐</button>
     </nav>
@@ -196,8 +247,8 @@ footer{padding:36px 0 48px; color:var(--muted); font-size:14px}
         <h1>I build payment systems that stay up.</h1>
         <p class="lede">10+ years building backend systems in Java across payments, e-commerce and logistics. Today I work on card payment authentication at 1,000 TPS and 99.999% availability.</p>
         <div class="ctas">
-          <a class="btn primary" href="#contact">Get in touch</a>
-          <a class="btn ghost" href="#experience">See my experience</a>
+          <a class="btn primary" href="Abhishek_Sharma_Resume.pdf" target="_blank" rel="noopener">Download resume (PDF)</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
         </div>
       </div>
 
@@ -259,7 +310,7 @@ footer{padding:36px 0 48px; color:var(--muted); font-size:14px}
   <!-- WORK -->
   <section class="block" id="work">
     <div class="wrap">
-      <h2>Things I've built</h2>
+      <h2>Work</h2>
       <div class="work">
         <article class="item">
           <div><div class="tag">Visa</div><h3>Release automation for a payments platform</h3></div>
@@ -298,6 +349,96 @@ footer{padding:36px 0 48px; color:var(--muted); font-size:14px}
             <p style="margin-top:14px"><a href="https://github.com/abhishek-sharma-1993">See my code on GitHub</a></p>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY -->
+  <section class="block" id="case-study">
+    <div class="wrap">
+      <h2>Case study: retries without the storm</h2>
+      <div class="cs-intro">
+        <ul class="cs-meta">
+          <li><strong>Where:</strong> Ajio order fulfilment, Jio Platforms</li>
+          <li><strong>My role:</strong> designed and built the library, drove adoption</li>
+          <li><strong>Stack:</strong> Java, Spring Boot, Kafka</li>
+          <li><strong>Outcome:</strong> adopted by 6 services as the team standard</li>
+        </ul>
+        <div>
+          <p>Picking, packing, labelling and printing ran as separate services that talked to each other asynchronously. When a downstream service timed out or returned a 503, messages were either lost or retried in a tight loop that blocked the partition and kept hitting a service that was already struggling. Every team handled failures a little differently.</p>
+          <p>The goal was one tested way to fail safely, so teams could stop rewriting retry logic and stop losing shipments to transient errors.</p>
+        </div>
+      </div>
+
+      <figure class="diagram" aria-labelledby="csFig">
+        <div class="lane-label">Happy path</div>
+        <div class="chain">
+          <div class="b ink">Fulfilment topic<small>main traffic</small></div><span class="ar">→</span>
+          <div class="b">Consumer<small>idempotent, keyed by message</small></div><span class="ar">→</span>
+          <div class="b ok">Done</div>
+        </div>
+        <div class="lane-label">Temporary failure: timeout, 503</div>
+        <div class="chain">
+          <div class="b">Retry 1<small>short delay</small></div><span class="ar">→</span>
+          <div class="b">Retry 2<small>longer delay</small></div><span class="ar">→</span>
+          <div class="b">Retry 3<small>longest delay</small></div><span class="ar">→</span>
+          <div class="b bad">Dead-letter topic</div>
+        </div>
+        <div class="lane-label">Permanent failure: bad data, validation</div>
+        <div class="chain">
+          <div class="b">Skip retries</div><span class="ar">→</span>
+          <div class="b bad">Dead-letter topic<small>alert, fix, replay</small></div>
+        </div>
+        <figcaption id="csFig">Failed messages leave the main topic, so healthy traffic keeps flowing while failures wait their turn.</figcaption>
+      </figure>
+
+      <div class="cs-grid">
+        <div>
+          <h3>Key decisions</h3>
+          <ul>
+            <li><b>Classify before retrying.</b> Only failures that can succeed later get retried; bad data goes straight to the dead-letter topic.</li>
+            <li><b>Non-blocking retry topics.</b> A failing message never holds up the rest of its partition.</li>
+            <li><b>Backoff, jitter and a cap.</b> Delays grow between attempts, spread out across instances, and stop after a fixed number of tries.</li>
+            <li><b>Idempotent consumers.</b> A message processed twice has the same effect as once.</li>
+            <li><b>Shipped as a library.</b> Six services share one implementation instead of six slightly different ones.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Trade-offs I'd call out</h3>
+          <ul>
+            <li><b>Ordering.</b> Retry topics let a later event for the same order overtake a failed one. Deduplication doesn't fix that; full-state updates need a version check, and dependent changes need later events held behind the failed one.</li>
+            <li><b>Replay after an outage.</b> Draining the dead-letter topic all at once can knock the recovered service over again, so replay needs to be rate-limited.</li>
+            <li><b>More moving parts.</b> Extra topics and alerts to own, in exchange for not losing shipments.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="cs-result">Result: adopted across 6 services, message reliability up 25%, downtime down 30%.</p>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section class="block" id="writing">
+    <div class="wrap">
+      <h2>Writing</h2>
+      <div class="posts">
+        <a class="post" href="https://www.linkedin.com/in/abhishek-sharma-827234102/recent-activity/all/" target="_blank" rel="noopener">
+          <span class="k">Rate limiting</span>
+          <h3>A distributed rate limiter with Redis and Lua</h3>
+          <p>Why the check and the decrement must happen in one atomic step.</p>
+          <span class="go">Read on LinkedIn →</span>
+        </a>
+        <a class="post" href="https://www.linkedin.com/in/abhishek-sharma-827234102/recent-activity/all/" target="_blank" rel="noopener">
+          <span class="k">Reliability</span>
+          <h3>Dangerous retries</h3>
+          <p>How a well-meant retry loop turns one bad message into an outage, and what to do instead.</p>
+          <span class="go">Read on LinkedIn →</span>
+        </a>
+        <a class="post" href="https://www.linkedin.com/in/abhishek-sharma-827234102/recent-activity/all/" target="_blank" rel="noopener">
+          <span class="k">More</span>
+          <h3>Notes on payments and distributed systems</h3>
+          <p>Short posts on what I learn building systems that can't go down.</p>
+          <span class="go">Follow on LinkedIn →</span>
+        </a>
       </div>
     </div>
   </section>
@@ -379,6 +520,7 @@ footer{padding:36px 0 48px; color:var(--muted); font-size:14px}
           <a class="l" href="mailto:abhishek.hcst15@gmail.com">Email <span>abhishek.hcst15@gmail.com</span></a>
           <a class="l" href="https://www.linkedin.com/in/abhishek-sharma-827234102/" target="_blank" rel="noopener">LinkedIn <span>Profile</span></a>
           <a class="l" href="https://github.com/abhishek-sharma-1993" target="_blank" rel="noopener">GitHub <span>abhishek-sharma-1993</span></a>
+          <a class="l" href="Abhishek_Sharma_Resume.pdf" target="_blank" rel="noopener">Resume <span>PDF</span></a>
         </div>
       </div>
     </div>
